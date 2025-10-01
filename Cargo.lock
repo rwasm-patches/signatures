@@ -804,6 +804,7 @@ checksum = "1ced73b1dacfc750a6db6c0a0c3a3853c8b41997e2e2c563dc90804ae6867959"
 [[package]]
 name = "fluentbase-codec"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "alloy-primitives",
  "byteorder",
@@ -816,6 +817,7 @@ dependencies = [
 [[package]]
 name = "fluentbase-codec-derive"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "convert_case 0.6.0",
  "crypto-hashes",
@@ -828,6 +830,7 @@ dependencies = [
 [[package]]
 name = "fluentbase-crypto"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "bytemuck",
  "cfg-if",
@@ -838,6 +841,7 @@ dependencies = [
 [[package]]
 name = "fluentbase-sdk"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -858,6 +862,7 @@ dependencies = [
 [[package]]
 name = "fluentbase-sdk-derive"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "alloy-sol-macro-input",
  "crypto-hashes",
@@ -871,6 +876,7 @@ dependencies = [
 [[package]]
 name = "fluentbase-sdk-derive-core"
 version = "0.4.10-dev"
+source = "git+https://github.com/fluentlabs-xyz/fluentbase.git?branch=feat/weierstrass-curves#37cf5576ffec99a9d1a56e7ac330f2f565675f40"
 dependencies = [
  "alloy-sol-macro-input",
  "anyhow",
@@ -1054,7 +1060,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4b0f83760fb341a774ed326568e19f5a863af4a952def8c39f9ab92fd95b88e5"
 dependencies = [
  "equivalent",
- "hashbrown 0.16.0",
+ "hashbrown 0.15.5",
  "serde",
  "serde_core",
 ]

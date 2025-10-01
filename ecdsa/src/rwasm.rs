@@ -8,10 +8,8 @@ use elliptic_curve::{
 };
 
 use elliptic_curve::Field;
-use sp1_lib::io::{self, FD_ECRECOVER_HOOK};
-use sp1_lib::unconstrained;
-use sp1_lib::{
-    secp256k1::Secp256k1Point, syscall_secp256k1_decompress, utils::AffinePoint as Sp1AffinePoint,
+use fluentbase_crypto::{
+    secp256k1::Secp256k1Point, utils::AffinePoint as Sp1AffinePoint,
 };
 
 use crate::{hazmat::bits2field, Signature, SignatureSize, VerifyingKey};
@@ -115,8 +113,7 @@ where
             Secp256k1Point::new(Secp256k1Point::GENERATOR),
             &u2_le_bits,
             affine,
-        )
-        .unwrap();
+        );
 
         // Convert the result of the MSM into a scalar and confirm that it matches the R value of the signature.
         let mut x_bytes_be = [0u8; 32];
@@ -150,21 +147,22 @@ fn be_bytes_to_le_bits(be_bytes: &[u8; 32]) -> [bool; 256] {
 /// [`VerifyingKey::recover_from_prehash_secp256k1`] to securely recover the public key associated with
 /// a signature and message hash.
 fn recover_ecdsa_unconstrained(sig: &[u8; 65], msg_hash: &[u8; 32]) -> ([u8; 33], [u8; 32]) {
+    unimplemented!();
     // The `unconstrained!` wrapper is used to not include the cycles used to get the "hint" for the compressed
     // public key and s_inverse values from a non-zkVM context, because the values will be constrained
     // in the VM.
-    unconstrained! {
-        let mut buf = [0; 65 + 32];
-        let (buf_sig, buf_msg_hash) = buf.split_at_mut(sig.len());
-        buf_sig.copy_from_slice(sig);
-        buf_msg_hash.copy_from_slice(msg_hash);
-        io::write(FD_ECRECOVER_HOOK, &buf);
-    }
-
-    let recovered_compressed_pubkey: [u8; 33] = io::read_vec().try_into().unwrap();
-    let s_inv_bytes_le: [u8; 32] = io::read_vec().try_into().unwrap();
-
-    (recovered_compressed_pubkey, s_inv_bytes_le)
+    // unconstrained! {
+    //     let mut buf = [0; 65 + 32];
+    //     let (buf_sig, buf_msg_hash) = buf.split_at_mut(sig.len());
+    //     buf_sig.copy_from_slice(sig);
+    //     buf_msg_hash.copy_from_slice(msg_hash);
+    //     io::write(FD_ECRECOVER_HOOK, &buf);
+    // }
+    //
+    // let recovered_compressed_pubkey: [u8; 33] = io::read_vec().try_into().unwrap();
+    // let s_inv_bytes_le: [u8; 32] = io::read_vec().try_into().unwrap();
+    //
+    // (recovered_compressed_pubkey, s_inv_bytes_le)
 }
 
 /// Takes in a compressed public key and decompresses it using the SP1 syscall `syscall_secp256k1_decompress`.
@@ -187,9 +185,7 @@ fn decompress_pubkey(compressed_pubkey: &[u8; 33]) -> Result<[u8; 65]> {
         3 => true,
         _ => unreachable!("The first byte of the compressed public key must be 0x02 or 0x03."),
     };
-    unsafe {
-        syscall_secp256k1_decompress(&mut decompressed_key, is_odd);
-    }
+    unimplemented!("syscall_secp256k1_decompress");
 
     let mut uncompressed_pubkey: [u8; 65] = [0; 65];
     uncompressed_pubkey[0] = 4;

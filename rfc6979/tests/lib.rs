@@ -1,5 +1,4 @@
 //! Smoke tests which use `MockCurve`
-
 #![cfg(feature = "dev")]
 
 use elliptic_curve::dev::MockCurve;

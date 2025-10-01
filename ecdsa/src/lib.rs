@@ -71,8 +71,8 @@ mod signing;
 #[cfg(feature = "verifying")]
 mod verifying;
 
-#[cfg(all(target_os = "zkvm", target_vendor = "succinct"))]
-mod sp1;
+#[cfg(feature = "hazmat")]
+mod rwasm;
 
 pub use crate::{normalized::NormalizedSignature, recovery::RecoveryId};
 
